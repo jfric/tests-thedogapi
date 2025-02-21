@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsTechniques.TheDogApi.Api", "TestsTechniques.TheDogApi.Api\TestsTechniques.TheDogApi.Api.csproj", "{46F8CAE9-69F4-429F-A596-7A5A5E5A937D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{92003AA9-B9C3-424E-9676-374818E47803}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsTechniques.TheDogApi.UnitTests", "TestsTechniques.TheDogApi.UnitTests\TestsTechniques.TheDogApi.UnitTests.csproj", "{C1ECF8C6-7A7B-4FC6-BE01-A7952E8E9675}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsTechniques.TheDogApi.Models", "TestsTechniques.TheDogApi.Models\TestsTechniques.TheDogApi.Models.csproj", "{1BF14CFC-6D6B-40ED-9F1F-4F07A6264260}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46F8CAE9-69F4-429F-A596-7A5A5E5A937D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46F8CAE9-69F4-429F-A596-7A5A5E5A937D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46F8CAE9-69F4-429F-A596-7A5A5E5A937D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46F8CAE9-69F4-429F-A596-7A5A5E5A937D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1ECF8C6-7A7B-4FC6-BE01-A7952E8E9675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1ECF8C6-7A7B-4FC6-BE01-A7952E8E9675}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1ECF8C6-7A7B-4FC6-BE01-A7952E8E9675}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1ECF8C6-7A7B-4FC6-BE01-A7952E8E9675}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BF14CFC-6D6B-40ED-9F1F-4F07A6264260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BF14CFC-6D6B-40ED-9F1F-4F07A6264260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BF14CFC-6D6B-40ED-9F1F-4F07A6264260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BF14CFC-6D6B-40ED-9F1F-4F07A6264260}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

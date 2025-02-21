@@ -1,0 +1,6 @@
+@TestsTechniques.TheDogApi.Api_HostAddress = http://localhost:5083
+
+GET {{TestsTechniques.TheDogApi.Api_HostAddress}}/
+Accept: application/json
+
+###
