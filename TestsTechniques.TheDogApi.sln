@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsTechniques.TheDogApi.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsTechniques.TheDogApi.Models", "TestsTechniques.TheDogApi.Models\TestsTechniques.TheDogApi.Models.csproj", "{1BF14CFC-6D6B-40ED-9F1F-4F07A6264260}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsTechniques.TheDogApi.DogApiClient", "TestsTechniques.TheDogApi.DogApiClient\TestsTechniques.TheDogApi.DogApiClient.csproj", "{BC23E8F8-690D-4716-8859-D4964AFF07A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +34,15 @@ Global
 		{1BF14CFC-6D6B-40ED-9F1F-4F07A6264260}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BF14CFC-6D6B-40ED-9F1F-4F07A6264260}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BF14CFC-6D6B-40ED-9F1F-4F07A6264260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC23E8F8-690D-4716-8859-D4964AFF07A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC23E8F8-690D-4716-8859-D4964AFF07A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC23E8F8-690D-4716-8859-D4964AFF07A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC23E8F8-690D-4716-8859-D4964AFF07A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E099B88-C727-467B-9357-EE6F16475126}
 	EndGlobalSection
 EndGlobal
