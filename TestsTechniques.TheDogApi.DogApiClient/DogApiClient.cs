@@ -109,7 +109,7 @@ namespace TestsTechniques.TheDogApi.DogApiClient
             }
         }
 
-        public async Task<Result<List<DogImage>>> GetBreedImages(int limit = 20)
+        public async Task<Result<List<DogImage>>> GetBreedImages(int limit = 10, int page = 0)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace TestsTechniques.TheDogApi.DogApiClient
 
                 using (var request = new HttpRequestMessage())
                 {
-                    request.RequestUri = new Uri($"images/search?limit={limit}", UriKind.RelativeOrAbsolute);
+                    request.RequestUri = new Uri($"images/search?limit={limit}&page={page}", UriKind.RelativeOrAbsolute);
                     request.Method = new HttpMethod("GET");
 
                     var response = await _httpClient.SendAsync(request);

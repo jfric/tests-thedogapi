@@ -10,7 +10,7 @@ namespace TestsTechniques.TheDogApi.DogApiClient.Extensions
     {
         public static IServiceCollection AddDogApiClient(this IServiceCollection services, IConfiguration configuration)
         {
-            if (!services.Any(x => x.ServiceType == typeof(DogApiClient)))
+            if (!services.Any(x => x.ServiceType == typeof(IDogApiClient)))
             {
                 if (string.IsNullOrWhiteSpace(configuration["DogApi:BaseUrl"]))
                 {
