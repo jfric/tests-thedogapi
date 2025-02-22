@@ -21,7 +21,7 @@ namespace TestsTechniques.TheDogApi.DogApiClient.Extensions
 
                 services.TryAddTransient<DogApiTokenHandler>();
 
-                services.AddHttpClient<DogApiClient>(x =>
+                services.AddHttpClient<IDogApiClient, DogApiClient>(x =>
                 {
                     x.BaseAddress = new Uri(configuration["DogApi:BaseUrl"]!);
                     x.Timeout = new TimeSpan(0, 0, 0, 15);

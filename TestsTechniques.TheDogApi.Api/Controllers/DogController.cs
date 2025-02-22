@@ -8,9 +8,10 @@ namespace TestsTechniques.TheDogApi.Api.Controllers
     public class DogController : ControllerBase
     {
         private readonly ILogger<DogController> _logger;
-        private readonly DogService _dogService;
+        private readonly IDogService _dogService;
 
-        public DogController(ILogger<DogController> logger, DogService dogService)
+        public DogController(ILogger<DogController> logger, 
+            IDogService dogService)
         {
             _logger = logger;
             _dogService = dogService;
@@ -21,12 +22,18 @@ namespace TestsTechniques.TheDogApi.Api.Controllers
         [Route("/dog/breeds")]
         public async Task<IActionResult> GetBreeds()
         {
+            _logger.LogDebug($"{nameof(DogController)}.{nameof(GetBreeds)} => Début méthode controller");
+
             var breeds = await _dogService.GetBreeds();
 
             if (breeds.IsFailure)
             {
+                _logger.LogCritical($"{nameof(DogController)}.{nameof(GetBreeds)} => Fin méthode controller : Failure");
+
                 return NotFound(breeds.Error);
             }
+
+            _logger.LogDebug($"{nameof(DogController)}.{nameof(GetBreeds)} => Fin méthode controller : Success");
 
             return Ok(breeds.Value);
         }
@@ -40,7 +47,7 @@ namespace TestsTechniques.TheDogApi.Api.Controllers
 
             if (breed.HasNoValue)
             {
-                _logger.LogError($"{nameof(DogController)}.{nameof(GetBreedById)} => Erreur lors la récupération du Breed {id}");
+                _logger.LogCritical($"{nameof(DogController)}.{nameof(GetBreedById)} => Erreur lors la récupération du Breed {id}");
 
                 return NotFound();
             }
@@ -57,7 +64,7 @@ namespace TestsTechniques.TheDogApi.Api.Controllers
 
             if (randomDogImage.IsFailure)
             {
-                _logger.LogError($"{nameof(DogController)}.{nameof(GetRandomDogImages)} => Erreur lors la récupération de la liste random de Breeds");
+                _logger.LogCritical($"{nameof(DogController)}.{nameof(GetRandomDogImages)} => Erreur lors la récupération de la liste random de Breeds");
 
                 return NotFound();
             }
@@ -74,6 +81,8 @@ namespace TestsTechniques.TheDogApi.Api.Controllers
 
             if (image.HasNoValue)
             {
+                _logger.LogCritical($"{nameof(DogController)}.{nameof(GetDogImage)} => Erreur lors la récupération de l'image {id}");
+
                 return NotFound();
             }
 

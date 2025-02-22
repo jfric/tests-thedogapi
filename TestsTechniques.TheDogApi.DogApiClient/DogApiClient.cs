@@ -5,12 +5,13 @@ using TestsTechniques.TheDogApi.Models.TheDogApi;
 
 namespace TestsTechniques.TheDogApi.DogApiClient
 {
-    public class DogApiClient
+    public class DogApiClient : IDogApiClient
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<DogApiClient> _logger;
 
-        public DogApiClient(HttpClient httpClient, ILogger<DogApiClient> logger)
+        public DogApiClient(HttpClient httpClient, 
+            ILogger<DogApiClient> logger)
         {
             _httpClient = httpClient;
             _logger = logger;
@@ -20,6 +21,8 @@ namespace TestsTechniques.TheDogApi.DogApiClient
         {
             try
             {
+                _logger.LogDebug($"{nameof(DogApiClient)}.{nameof(GetBreeds)} => Début méthode");
+
                 using (var request = new HttpRequestMessage())
                 {
                     request.RequestUri = new Uri("breeds", UriKind.RelativeOrAbsolute);
@@ -37,22 +40,24 @@ namespace TestsTechniques.TheDogApi.DogApiClient
 
                         if (breeds is not null)
                         {
+                            _logger.LogDebug($"{nameof(DogApiClient)}.{nameof(GetBreeds)} => Fin méthode");
+
                             return Result.Success(breeds);
                         }
 
-                        _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreeds)} => Impossible de désérialiser la réponse");
+                        _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreeds)} => Fin méthode, impossible de désérialiser la réponse");
 
                         return Result.Failure<List<Breed>>($"Impossible de désérialiser la réponse");
                     }
 
-                    _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreeds)} => Problème, réponse avec le status code : {statusCode}");
+                    _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreeds)} => Fin méthode, problème, réponse avec le status code : {statusCode}");
 
                     return Result.Failure<List<Breed>>($"Problème lors de la récupération des breeds => Status Code : {statusCode}");
                 }
             } 
             catch (Exception exception)
             {
-                _logger.LogCritical(exception, $"{nameof(DogApiClient)}.{nameof(GetBreeds)} => Problème lors de la récupération de la liste de Breeds");
+                _logger.LogCritical(exception, $"{nameof(DogApiClient)}.{nameof(GetBreeds)} => Fin méthode, problème lors de la récupération de la liste de Breeds");
 
                 return Result.Failure<List<Breed>>($"Problème lors de la récupération des breeds : {exception.Message}");
             }
@@ -62,6 +67,8 @@ namespace TestsTechniques.TheDogApi.DogApiClient
         {
             try
             {
+                _logger.LogDebug($"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Début méthode");
+
                 using (var request = new HttpRequestMessage())
                 {
                     request.RequestUri = new Uri($"breeds/{id}", UriKind.RelativeOrAbsolute);
@@ -79,6 +86,8 @@ namespace TestsTechniques.TheDogApi.DogApiClient
 
                         if (breed is not null)
                         {
+                            _logger.LogDebug($"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Fin méthode");
+
                             return breed;
                         }
 
@@ -87,14 +96,14 @@ namespace TestsTechniques.TheDogApi.DogApiClient
                         return Maybe<Breed>.None;
                     }
 
-                    _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Problème, réponse avec le status code : {statusCode}");
+                    _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Fin méthode, problème, réponse avec le status code : {statusCode}");
 
                     return Maybe<Breed>.None;
                 }
             }
             catch (Exception exception)
             {
-                _logger.LogCritical(exception, $"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Problème lors de la récupération du Breed avec l'id {id}");
+                _logger.LogCritical(exception, $"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Fin méthode, exception levée lors de la récupération du Breed avec l'id {id}");
 
                 return Maybe<Breed>.None;
             }
@@ -104,6 +113,8 @@ namespace TestsTechniques.TheDogApi.DogApiClient
         {
             try
             {
+                _logger.LogDebug($"{nameof(DogApiClient)}.{nameof(GetBreedImages)} => Début méthode");
+
                 using (var request = new HttpRequestMessage())
                 {
                     request.RequestUri = new Uri($"images/search?limit={limit}", UriKind.RelativeOrAbsolute);
@@ -121,22 +132,24 @@ namespace TestsTechniques.TheDogApi.DogApiClient
 
                         if (images is not null)
                         {
+                            _logger.LogDebug($"{nameof(DogApiClient)}.{nameof(GetBreedImages)} => Fin méthode");
+
                             return Result.Success(images);
                         }
 
-                        _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Impossible de désérialiser la réponse");
+                        _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreedImages)} => Fin méthode, impossible de désérialiser la réponse");
 
                         return Result.Failure<List<DogImage>>("Impossible de désérialiser la réponse");
                     }
 
-                    _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Problème, réponse avec le status code : {statusCode}");
+                    _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreedImages)} => Fin méthode, problème, réponse avec le status code : {statusCode}");
 
                     return Result.Failure<List<DogImage>>($"Problème, réponse avec le status code : {statusCode}");
                 }
             }
             catch (Exception exception)
             {
-                _logger.LogCritical(exception, $"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Problème lors de la récupération des images");
+                _logger.LogCritical(exception, $"{nameof(DogApiClient)}.{nameof(GetBreedImages)} => Fin méthode, exception levée lors de la récupération des images");
 
                 return Result.Failure<List<DogImage>>($"Problème lors de la récupération des images : {exception.Message}");
             }
@@ -146,6 +159,8 @@ namespace TestsTechniques.TheDogApi.DogApiClient
         {
             try
             {
+                _logger.LogDebug($"{nameof(DogApiClient)}.{nameof(GetBreedImageById)} => Début méthode");
+
                 using (var request = new HttpRequestMessage())
                 {
                     request.RequestUri = new Uri($"images/{id}", UriKind.RelativeOrAbsolute);
@@ -163,22 +178,24 @@ namespace TestsTechniques.TheDogApi.DogApiClient
 
                         if (image is not null)
                         {
+                            _logger.LogDebug($"{nameof(DogApiClient)}.{nameof(GetBreedImageById)} => Fin méthode");
+
                             return image;
                         }
 
-                        _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Impossible de désérialiser la réponse");
+                        _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreedImageById)} => Fin méthode, impossible de désérialiser la réponse");
 
                         return Maybe<DogImage>.None;
                     }
 
-                    _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Problème, réponse avec le status code : {statusCode}");
+                    _logger.LogCritical($"{nameof(DogApiClient)}.{nameof(GetBreedImageById)} => Fin méthode, problème réponse avec le status code : {statusCode}");
 
                     return Maybe<DogImage>.None;
                 }
             }
             catch (Exception exception)
             {
-                _logger.LogCritical(exception, $"{nameof(DogApiClient)}.{nameof(GetBreedById)} => Problème lors de la récupération des images");
+                _logger.LogCritical(exception, $"{nameof(DogApiClient)}.{nameof(GetBreedImageById)} => Fin méthode, exception levée lors de la récupération des images");
 
                 return Maybe<DogImage>.None;
             }
