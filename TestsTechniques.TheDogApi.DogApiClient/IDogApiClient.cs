@@ -8,6 +8,6 @@ namespace TestsTechniques.TheDogApi.DogApiClient
         Task<Maybe<Breed>> GetBreedById(int id);
         Task<Maybe<DogImage>> GetBreedImageById(string id);
         Task<Result<List<DogImage>>> GetBreedImages(int limit = 10, int page = 0);
-        Task<Result<List<Breed>>> GetBreeds();
+        Task<Result<List<Breed>>> GetBreeds(int limit = 10, int page = 0);
     }
 }
