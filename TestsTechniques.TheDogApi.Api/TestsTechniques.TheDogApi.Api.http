@@ -1,6 +1,15 @@
 @TestsTechniques.TheDogApi.Api_HostAddress = http://localhost:5083
 
-GET {{TestsTechniques.TheDogApi.Api_HostAddress}}/
+GET {{TestsTechniques.TheDogApi.Api_HostAddress}}/dog/breeds
+Accept: application/json
+
+GET {{TestsTechniques.TheDogApi.Api_HostAddress}}/dog/breeds/1
+Accept: application/json
+
+GET {{TestsTechniques.TheDogApi.Api_HostAddress}}/dog/images/random
+Accept: application/json
+
+GET {{TestsTechniques.TheDogApi.Api_HostAddress}}/dog/images/1
 Accept: application/json
 
 ###

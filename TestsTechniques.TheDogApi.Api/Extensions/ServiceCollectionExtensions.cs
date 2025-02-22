@@ -1,12 +1,14 @@
-﻿using TestsTechniques.TheDogApi.Models.Configuration;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+using TestsTechniques.TheDogApi.Api.Services;
+using TestsTechniques.TheDogApi.Models.Configuration;
 
 namespace TestsTechniques.TheDogApi.Api.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.Configure<TheDogApiConfiguration>(configuration.GetSection(TheDogApiConfiguration.DogApiConfiguration));
+            services.TryAddTransient<DogService>();
 
             return services;
         }

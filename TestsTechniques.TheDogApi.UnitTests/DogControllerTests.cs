@@ -24,7 +24,10 @@ namespace TestsTechniques.TheDogApi.UnitTests
                     services.AddSingleton(loggerMock.Object);
                 });
             });
-            _client = _factory.CreateClient();
+            _client = _factory.CreateClient(new WebApplicationFactoryClientOptions()
+            {
+                BaseAddress = new Uri("http://localhost:5083")
+            });
         }
 
         [Fact]

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
-using DogApiHttpClient = TestsTechniques.TheDogApi.DogApiClient.DogApiClient;
+using TestsTechniques.TheDogApi.Api.Services;
 
 namespace TestsTechniques.TheDogApi.Api.Controllers
 {
@@ -9,58 +8,76 @@ namespace TestsTechniques.TheDogApi.Api.Controllers
     public class DogController : ControllerBase
     {
         private readonly ILogger<DogController> _logger;
-        private readonly DogApiHttpClient _dogApiClient;
+        private readonly DogService _dogService;
 
-        public DogController(ILogger<DogController> logger, DogApiHttpClient dogApiClient)
+        public DogController(ILogger<DogController> logger, DogService dogService)
         {
             _logger = logger;
-            _dogApiClient = dogApiClient;
+            _dogService = dogService;
         }
 
         // GET /dog/breeds
+        [HttpGet]
         [Route("/dog/breeds")]
-        [SwaggerOperation(Description = "Récupère la liste des breeds")]
         public async Task<IActionResult> GetBreeds()
         {
-            var breeds = await _dogApiClient.GetBreeds();
+            var breeds = await _dogService.GetBreeds();
 
-            return Ok(breeds);
+            if (breeds.IsFailure)
+            {
+                return NotFound(breeds.Error);
+            }
+
+            return Ok(breeds.Value);
         }
 
         // GET /dog/breeds/{id}
+        [HttpGet]
         [Route("/dog/breeds/{id}")]
-        [SwaggerOperation(
-            Description = "Récupère un breed par son id",
-            OperationId = "GetBreedById",
-            Tags = new[] { "Breed" }
-        )]
         public async Task<IActionResult> GetBreedById(int id)
         {
-            return Ok();
+            var breed = await _dogService.GetBreedById(id);
+
+            if (breed.HasNoValue)
+            {
+                _logger.LogError($"{nameof(DogController)}.{nameof(GetBreedById)} => Erreur lors la récupération du Breed {id}");
+
+                return NotFound();
+            }
+
+            return Ok(breed.Value);
         }
 
         // GET /dog/images/random
+        [HttpGet]
         [Route("/dog/images/random")]
-        [SwaggerOperation(
-            Description = "Récupère une image d'un breed au hasard",
-            OperationId = "GetRandomDogImage",
-            Tags = new[] { "Images" }
-        )]
-        public async Task<IActionResult> GetRandomDogImage()
+        public async Task<IActionResult> GetRandomDogImages()
         {
-            return Ok();
+            var randomDogImage = await _dogService.GetImageRandom();
+
+            if (randomDogImage.IsFailure)
+            {
+                _logger.LogError($"{nameof(DogController)}.{nameof(GetRandomDogImages)} => Erreur lors la récupération de la liste random de Breeds");
+
+                return NotFound();
+            }
+
+            return Ok(randomDogImage.Value);
         }
 
         // GET /dog/images/{id}
+        [HttpGet]
         [Route("/dog/images/{id}")]
-        [SwaggerOperation(
-            Description = "Récupère l'image d'un breed par son imageId",
-            OperationId = "GetDogImage", 
-            Tags = new[] { "Images" }
-        )]
-        public async Task<IActionResult> GetDogImage(int id)
+        public async Task<IActionResult> GetDogImage(string id)
         {
-            return Ok();
+            var image = await _dogService.GetImageById(id);
+
+            if (image.HasNoValue)
+            {
+                return NotFound();
+            }
+
+            return Ok(image.Value);
         }
     }
 }

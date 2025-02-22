@@ -1,3 +1,4 @@
+using TestsTechniques.TheDogApi.Api.Extensions;
 using TestsTechniques.TheDogApi.DogApiClient.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,13 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddServices();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
-builder.Services.AddSwaggerGen(x =>
-{
-    x.EnableAnnotations();
-});
 
 builder.Services.AddDogApiClient(builder.Configuration);
 
@@ -23,9 +21,6 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.UseSwagger();
-app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
