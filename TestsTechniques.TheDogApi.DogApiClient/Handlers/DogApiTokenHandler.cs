@@ -16,9 +16,7 @@ namespace TestsTechniques.TheDogApi.DogApiClient.Handlers
         {
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("x-api-key", _dogApiConfiguration.ApiKey);
 
-            var response = await base.SendAsync(request, cancellationToken);
-
-            return response;
+            return await base.SendAsync(request, cancellationToken);
         }
     }
 }
